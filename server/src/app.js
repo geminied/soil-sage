@@ -28,11 +28,14 @@ export const app = express()
 
 app.use(
   cors({
-    origin: env.corsOrigins,
+    origin: 'https://soil-sage-one.vercel.app',  // Replace with your actual frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   })
 )
 app.use(express.json({ limit: '2mb' }))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/health', (_req, res) => {
   res.json({ ok: true, service: 'soil-sage-api' })
@@ -62,6 +65,12 @@ v1.use('/recommendations', recommendationRoutes)
 v1.use('/appointments', appointmentRoutes)
 
 app.use('/api/v1', v1)
+app.use('/api/v1/auth', authRoutes)
+
+// Start the server
+app.listen(env.PORT, () => {
+  console.log(`Server is running on port ${env.PORT}`)
+})
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, _req, res, _next) => {
