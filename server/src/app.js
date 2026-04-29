@@ -77,3 +77,12 @@ app.use((err, _req, res, _next) => {
   console.error(err)
   res.status(500).json({ error: 'Internal server error' })
 })
+
+fetch('https://soil-sage-api.onrender.com/api/v1/admin/approvals', {
+  method: 'PATCH',
+  headers: {
+    'Authorization': `Bearer ${your_token}`,  // Add your auth token here
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ /* data */ })
+})
