@@ -12,6 +12,28 @@ router.get('/', requireAuth, async (req, res) => {
   return res.json({ notifications: list })
 })
 
+// PATCH route (mark notification as read)
+router.patch('/:id/read', requireAuth, async (req, res) => {
+  try {
+    const n = await Notification.findOne({
+      _id: req.params.id,
+      userId: req.user._id,
+    });
+
+    if (!n) {
+      return res.status(404).json({ error: 'Notification not found' });
+    }
+
+    n.read = true;
+    await n.save();
+
+    return res.json({ notification: n, message: 'Notification marked as read' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Something went wrong' });
+  }
+});
+
 router.patch('/:id/read', requireAuth, async (req, res) => {
   const n = await Notification.findOne({
     _id: req.params.id,
