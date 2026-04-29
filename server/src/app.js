@@ -29,7 +29,7 @@ export const app = express()
 app.use(
   cors({
     origin: 'https://soil-sage-one.vercel.app',  // Replace with your actual frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
   })
 )
