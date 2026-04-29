@@ -1,8 +1,11 @@
 /**
  * Soil Sage API client.
  * Vite dev proxy forwards /api to the Express server.
+ * In production, uses VITE_API_URL environment variable.
  */
-const API_BASE = '/api/v1'
+const API_BASE = import.meta.env.VITE_API_URL 
+  ? `${import.meta.env.VITE_API_URL}/api/v1`
+  : '/api/v1'
 const TOKEN_KEY = 'soil_sage_token'
 
 /** True when fetch() failed before any HTTP response (server down, restart, CORS, DNS). */
