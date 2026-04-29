@@ -78,6 +78,9 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: 'Internal server error' })
 })
 
+
+const your_token = localStorage.getItem('auth_token');  // Or wherever your token is stored
+
 fetch('https://soil-sage-api.onrender.com/api/v1/admin/approvals', {
   method: 'PATCH',
   headers: {
