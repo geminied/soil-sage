@@ -26,6 +26,7 @@ import appointmentRoutes from './routes/appointments.js'
 
 
 
+
 export const app = express()
 
 app.use(
@@ -91,3 +92,4 @@ fetch('https://soil-sage-api.onrender.com/api/v1/admin/approvals', {
   },
   body: JSON.stringify({ /* data */ })
 })
+
