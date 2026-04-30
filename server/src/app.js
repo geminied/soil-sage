@@ -81,12 +81,12 @@ app.use((err, _req, res, _next) => {
 })
 
 
-const your_token = localStorage.getItem('auth_token');  // Or wherever your token is stored
+const your_token = process.env.ADMIN_TOKEN;  // Get from .env file instead
 
 fetch('https://soil-sage-api.onrender.com/api/v1/admin/approvals', {
   method: 'PATCH',
   headers: {
-    'Authorization': `Bearer ${your_token}`,  // Add your auth token here
+    'Authorization': `Bearer ${your_token}`,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ /* data */ })
