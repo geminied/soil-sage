@@ -7,16 +7,20 @@ import App from './App.jsx'
 import { AuthProvider } from './context/AuthProvider.jsx'
 
 
-// Create a new query client
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: { retry: 1, staleTime: 30_000 },
+  },
+})
 
-// Render the React app
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </BrowserRouter>
     </QueryClientProvider>
-  </StrictMode>
-);
+  </StrictMode>,
+)
